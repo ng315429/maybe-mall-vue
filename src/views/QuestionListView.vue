@@ -28,10 +28,6 @@ export default {
 <style scoped lang="scss">
 .list-wrap {
   background-color: $main-background-color;
-  padding: 1rem 1rem;
-  .list-area {
-    padding: 0rem 0.5rem;
-  }
   .add-btn {
     border-radius: 50%;
     display: flex;
