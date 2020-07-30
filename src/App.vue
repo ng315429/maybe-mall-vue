@@ -2,9 +2,33 @@
   <div class="main-wrap" id="app">
     <div class="main-area">
       <router-view />
+      <login-modal v-if="showLoginModal"></login-modal>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      showLoginModal: false,
+    };
+  },
+  components: {
+    LoginModal: () => import('@/components/LoginModal'),
+  },
+  methods: {
+    showLogin(show) {
+      this.showLoginModal = show;
+    },
+  },
+  created() {
+    this.$EventBus.$on('show-login', this.showLogin);
+  },
+  destroyed() {
+    this.$EventBus.$off('show-login');
+  },
+};
+</script>
 
 <style lang="scss">
 .main-wrap {
