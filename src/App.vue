@@ -12,7 +12,7 @@
   margin: 0 auto;
   background-color: #f7f7f5;
   .main-area {
-    width: 1005;
+    width: 100%;
     max-width: 414px;
     margin: 0 auto;
     border: 1px solid $main-color;
