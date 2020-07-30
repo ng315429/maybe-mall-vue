@@ -20,8 +20,14 @@ export default {
 <style scoped lang="scss">
 .search-wrap {
   background-color: #fff;
-  label {
-    font-size: 1.2rem;
+  .search-input {
+    text-indent: 1rem;
+    label {
+      font-size: 1.2rem;
+    }
+    .md-input {
+      text-indent: 1rem;
+    }
   }
 }
 </style>
