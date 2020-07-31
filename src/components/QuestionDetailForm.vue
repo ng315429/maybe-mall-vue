@@ -61,7 +61,7 @@
 
       <div class="upload-btn">
         <md-button class="md-raised" type="submit">
-          질문 등록
+          질문 수정
         </md-button>
       </div>
     </form>

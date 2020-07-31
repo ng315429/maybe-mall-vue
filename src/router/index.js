@@ -29,13 +29,18 @@ const routes = [
     ],
   },
   {
-    path: '/add',
+    path: '/question',
     component: () => import('@/layout/MainLayout'),
     children: [
       {
-        path: '',
+        path: 'add',
         name: '질문등록',
         component: () => import('@/views/QuestionAddView.vue'),
+      },
+      {
+        path: ':id',
+        name: '질문상세',
+        component: () => import('@/views/QuestionDetailView.vue'),
       },
     ],
   },
