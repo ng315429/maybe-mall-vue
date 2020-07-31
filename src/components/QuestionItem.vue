@@ -1,0 +1,191 @@
+<template>
+  <div class="item-wrap">
+    <md-card class="md-primary" md-theme="black-card">
+      <question-item-header></question-item-header>
+
+      <div class="img-area">
+        <div class="img-box">
+          <div class="img-section">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSSPZ5SSbU9o4WeXtFkr4DVLIFFka_UBbIQnA&usqp=CAU"
+            />
+            <div class="vote-check">
+              <md-icon class="md-size-2x">check_circle_outline</md-icon>
+            </div>
+          </div>
+          <button class="vote-btn">
+            투표
+          </button>
+        </div>
+        <div class="divider"></div>
+        <div class="img-box">
+          <div class="img-section">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSSPZ5SSbU9o4WeXtFkr4DVLIFFka_UBbIQnA&usqp=CAU"
+            />
+            <div class="vote-check" :class="{ active: isActive }">
+              <md-icon class="md-size-2x">done</md-icon>
+            </div>
+          </div>
+          <button class="vote-btn">
+            투표
+          </button>
+        </div>
+      </div>
+
+      <div class="item-info-area">
+        <question-item-input
+          unit="이름"
+          leftValue="이름1"
+          rightValue="이름2"
+        ></question-item-input>
+
+        <question-item-input
+          unit="브랜드"
+          leftValue="브랜드1"
+          rightValue="브랜드2"
+        ></question-item-input>
+
+        <question-item-input
+          unit="가격"
+          leftValue="가격1"
+          rightValue="가격2"
+        ></question-item-input>
+
+        <question-item-input
+          unit="링크"
+          leftValue="링크1"
+          rightValue="링크2"
+        ></question-item-input>
+      </div>
+
+      <div class="item-description">
+        <p>
+          asdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdas
+        </p>
+      </div>
+
+      <div class="item-comment">
+        <div class="comment-btn-box">
+          <button class="comment-btn" @click="showComment">댓글 달기</button>
+        </div>
+        <div class="comment-content" v-if="showCommentCheck">
+          댓글...
+        </div>
+      </div>
+    </md-card>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isActive: true,
+      showCommentCheck: false,
+    };
+  },
+  components: {
+    QuestionItemHeader: () => import('@/components/QuestionItemHeader'),
+    QuestionItemInput: () => import('@/components/QuestionItemInput'),
+  },
+  methods: {
+    showComment() {
+      this.showCommentCheck = !this.showCommentCheck;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+.item-wrap {
+  background-color: #fff;
+  margin: 1.5rem auto;
+  .md-card {
+    border-radius: 5px;
+  }
+  .img-area {
+    display: flex;
+    justify-content: space-between;
+
+    .divider {
+      width: 1px;
+      background-color: gray;
+    }
+    .img-box {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      .img-section {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        img {
+          width: 100%;
+        }
+        .vote-check {
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          background: #000;
+          opacity: 0.5;
+          color: #fff;
+          display: none;
+
+          &.active {
+            display: flex;
+          }
+        }
+      }
+
+      .vote-btn {
+        font-size: 1.2rem;
+        width: 100%;
+        height: 3.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f29609;
+        color: #fff;
+        border-width: 0;
+      }
+    }
+  }
+  .item-info-area {
+    padding: 1rem 0;
+  }
+  .item-description {
+    border-top: 1px solid $main-border-color;
+    border-bottom: 1px solid $main-border-color;
+    padding: 1rem 1rem;
+    width: 90%;
+    margin: 0 auto;
+    p {
+      font-size: 1.3rem;
+      word-break: break-all;
+    }
+  }
+  .item-comment {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem 0;
+    .comment-btn-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      button {
+        background-color: #fff;
+        border: 0;
+      }
+    }
+    .comment-content {
+      width: 100%;
+      padding: 1rem 1rem;
+    }
+  }
+}
+</style>

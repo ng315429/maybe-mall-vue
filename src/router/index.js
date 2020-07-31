@@ -1,28 +1,53 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "Home",
-    component: Home
+    path: '/',
+    name: '메인',
+    redirect: '/',
+    component: () => import('@/layout/MainLayout'),
+    children: [
+      {
+        path: '/',
+        name: '메인',
+        component: () => import('@/views/QuestionListView.vue'),
+      },
+    ],
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
+    path: '/register',
+    component: () => import('@/layout/MainLayout'),
+    children: [
+      {
+        path: '',
+        name: '회원가입',
+        component: () => import('@/views/UserRegisterView.vue'),
+      },
+    ],
+  },
+  {
+    path: '/question',
+    component: () => import('@/layout/MainLayout'),
+    children: [
+      {
+        path: 'add',
+        name: '질문등록',
+        component: () => import('@/views/QuestionAddView.vue'),
+      },
+      {
+        path: ':id',
+        name: '질문상세',
+        component: () => import('@/views/QuestionDetailView.vue'),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
-  routes
+  routes,
 });
 
 export default router;
