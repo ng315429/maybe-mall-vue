@@ -24,7 +24,7 @@
             </md-list-item>
           </template>
           <template v-else>
-            <md-list-item @click="goPathPush('/add')">
+            <md-list-item @click="goPathPush('/question/add')">
               <md-icon>move_to_inbox</md-icon>
               <span class="md-list-item-text">질문등록</span>
             </md-list-item>
