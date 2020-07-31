@@ -1,16 +1,18 @@
 <template>
   <div>
-    <user-register-form></user-register-form>
+    <question-add-form></question-add-form>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      category: '',
+    };
   },
   components: {
-    UserRegisterForm: () => import('@/components/UserRegisterForm'),
+    QuestionAddForm: () => import('@/components/QuestionAddForm'),
   },
 };
 </script>
