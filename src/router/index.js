@@ -28,6 +28,17 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/add',
+    component: () => import('@/layout/MainLayout'),
+    children: [
+      {
+        path: '',
+        name: '질문등록',
+        component: () => import('@/views/QuestionAddView.vue'),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

@@ -18,11 +18,15 @@
               <md-icon>move_to_inbox</md-icon>
               <span class="md-list-item-text">로그인</span>
             </md-list-item>
-          </template>
-          <template v-else>
             <md-list-item @click="goPathPush('/register')">
               <md-icon>move_to_inbox</md-icon>
               <span class="md-list-item-text">회원가입</span>
+            </md-list-item>
+          </template>
+          <template v-else>
+            <md-list-item @click="goPathPush('/add')">
+              <md-icon>move_to_inbox</md-icon>
+              <span class="md-list-item-text">질문등록</span>
             </md-list-item>
             <md-list-item>
               <md-icon>move_to_inbox</md-icon>
