@@ -3,27 +3,33 @@
     <div class="modal-wrap">
       <div class="model-back" @click="closeModal"></div>
       <div class="login-area">
-        <div @click="closeModal">
-          <md-icon class="md-size-1x close-btn">
-            close
-          </md-icon>
-        </div>
+        <form @submit.prevent="onSubmit">
+          <div @click="closeModal">
+            <md-icon class="md-size-1x close-btn">
+              close
+            </md-icon>
+          </div>
 
-        <h2 class="login-header">로그인</h2>
+          <h2 class="login-header">로그인</h2>
 
-        <md-field md-clearable>
-          <label>ID</label>
-          <md-input v-model="username"></md-input>
-        </md-field>
-        <md-field>
-          <label>PASSWORD</label>
-          <md-input v-model="password" type="password"></md-input>
-        </md-field>
+          <md-field md-clearable>
+            <label>ID</label>
+            <md-input v-model="username"></md-input>
+          </md-field>
+          <md-field>
+            <label>PASSWORD</label>
+            <md-input v-model="password" type="password"></md-input>
+          </md-field>
 
-        <div class="btn-box">
-          <md-button class="md-raised" @click="register">회원가입</md-button>
-          <md-button class="md-raised" @click="login">로그인</md-button>
-        </div>
+          <div class="btn-box">
+            <md-button class="md-raised" @click="register" type="button">
+              회원가입
+            </md-button>
+            <md-button class="md-raised" @click="onSubmit" type="submit">
+              로그인
+            </md-button>
+          </div>
+        </form>
       </div>
     </div>
   </transition>
@@ -43,9 +49,9 @@ export default {
     },
     register() {
       this.closeModal();
-      console.log('register');
+      this.$router.push('/register');
     },
-    login() {
+    onSubmit() {
       this.closeModal();
       console.log('login');
     },
