@@ -1,6 +1,6 @@
 <template>
   <div class="register-wrap">
-    <form action="/auth/register" v-on:submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
       <h1>회원가입</h1>
       <md-field md-clearable>
         <label>아이디</label>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { apiRegisterUser } from '@/api/auth';
 export default {
   data() {
     return {
@@ -63,8 +64,29 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      console.log('onSubmit');
+    async onSubmit() {
+      const userData = {
+        username: this.username,
+        password: this.password,
+        name: this.name,
+        email: this.email,
+        age: this.age,
+      };
+      try {
+        const { data } = await apiRegisterUser(userData);
+        if (data.username) {
+          this.$router.push('/');
+        }
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+        console.log(error.config);
+      }
     },
   },
 };

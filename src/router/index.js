@@ -29,6 +29,17 @@ const routes = [
     ],
   },
   {
+    path: '/login',
+    component: () => import('@/layout/MainLayout'),
+    children: [
+      {
+        path: '',
+        name: '로그인',
+        component: () => import('@/views/UserLoginView.vue'),
+      },
+    ],
+  },
+  {
     path: '/question',
     component: () => import('@/layout/MainLayout'),
     children: [

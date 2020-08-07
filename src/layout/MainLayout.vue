@@ -32,6 +32,10 @@
               <md-icon>move_to_inbox</md-icon>
               <span class="md-list-item-text">올린 질문</span>
             </md-list-item>
+            <md-list-item @click="goPathPush('login')">
+              <md-icon>move_to_inbox</md-icon>
+              <span class="md-list-item-text">로그아웃</span>
+            </md-list-item>
           </template>
         </md-list>
       </md-drawer>
@@ -46,27 +50,38 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      isLogin: true,
       showNavigation: false,
     };
   },
+  computed: {
+    ...mapGetters({
+      isLogin: 'getUserName',
+    }),
+  },
   methods: {
     goPathPush(path) {
-      this.showNavigation = false;
-      if (this.$route.path !== path) {
-        if (path === '/login') {
-          this.$EventBus.$emit('show-login', true);
-        } else {
+      if (path === 'login') {
+        this.$store.commit('SET_INIT');
+        location.href = '/';
+      } else {
+        this.showNavigation = false;
+        if (this.$route.path !== path) {
           this.$router.push(`${path}`);
         }
       }
+
+      // if (this.$route.path !== path) {
+      //   if (path === '/login') {
+      //     this.$EventBus.$emit('show-login', true);
+      //   } else {
+      //     this.$router.push(`${path}`);
+      //   }
+      // }
     },
-  },
-  created() {
-    console.log(this.$route);
   },
 };
 </script>
