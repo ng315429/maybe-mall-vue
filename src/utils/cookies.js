@@ -1,6 +1,6 @@
 import cookies from 'vue-cookies';
 
-const setAccessTokenCookie = (value, expired) => {
+const setAccessTokenCookie = (value, expired = 1) => {
   if (expired) {
     cookies.set('access_token', value);
   } else {
@@ -8,7 +8,7 @@ const setAccessTokenCookie = (value, expired) => {
   }
 };
 
-const setRefreshTokenCookie = (value, expired) => {
+const setRefreshTokenCookie = (value, expired = 7) => {
   if (expired) {
     cookies.set('refresh_token', value);
   } else {
@@ -16,14 +16,14 @@ const setRefreshTokenCookie = (value, expired) => {
   }
 };
 
-const setUserNameCookie = (value, expired) => {
+const setUserNameCookie = (value, expired = 7) => {
   if (expired) {
     cookies.set('user_name', value);
   } else {
     cookies.set('user_name', value, expired);
   }
 };
-const setNameCookie = (value, expired) => {
+const setNameCookie = (value, expired = 7) => {
   if (expired) {
     cookies.set('name', value);
   } else {

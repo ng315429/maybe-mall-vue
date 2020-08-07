@@ -36,7 +36,7 @@ const setInterceptor = instance => {
             console.log(error.message);
           }
           console.log(error.config);
-          store.dispatch('SET_INIT');
+          store.commit('SET_INIT');
         }
       }
 
