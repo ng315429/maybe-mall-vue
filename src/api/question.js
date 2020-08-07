@@ -1,10 +1,11 @@
 import { instanceAuth } from './index';
 
-const apiTest = () => {
+const apiAddQuestion = payload => {
   return instanceAuth({
-    method: 'get',
-    url: 'test',
+    method: 'post',
+    url: 'question',
+    data: payload,
   });
 };
 
-export { apiTest };
+export { apiAddQuestion };

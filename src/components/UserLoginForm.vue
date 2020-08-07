@@ -58,23 +58,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.modal-fade-enter,
-.modal-fade-leave-active {
-  opacity: 0;
-}
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: all 0.5s ease;
-}
-
 .modal-wrap {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   margin: 0 auto;
-  height: 100%;
-  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -69,7 +69,9 @@ export default {
         location.href = '/';
       } else {
         this.showNavigation = false;
-        this.$router.push(`${path}`);
+        if (this.$route.path !== path) {
+          this.$router.push(`${path}`);
+        }
       }
 
       // if (this.$route.path !== path) {

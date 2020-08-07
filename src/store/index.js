@@ -21,6 +21,8 @@ export default new Vuex.Store({
       deleteCookie('refresh_token');
       deleteCookie('user_name');
       deleteCookie('name');
+
+      location.href = '/';
     },
   },
   actions: {},
