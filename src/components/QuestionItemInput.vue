@@ -16,11 +16,11 @@ export default {
       default: '',
     },
     leftValue: {
-      type: String,
+      // type: String,
       default: '',
     },
     rightValue: {
-      type: String,
+      // type: String,
       default: '',
     },
   },

@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { apiAddQuestion } from '@/api/question';
+import { apiAddQuestion } from '@/api/questions';
 
 export default {
   data() {
