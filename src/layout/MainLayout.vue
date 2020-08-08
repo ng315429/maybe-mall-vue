@@ -24,11 +24,11 @@
             </md-list-item>
           </template>
           <template v-else>
-            <md-list-item @click="goPathPush('/question/add')">
+            <md-list-item @click="goPathPush('/questions/add')">
               <md-icon>move_to_inbox</md-icon>
               <span class="md-list-item-text">질문등록</span>
             </md-list-item>
-            <md-list-item>
+            <md-list-item @click="goPathPush('/questions/me')">
               <md-icon>move_to_inbox</md-icon>
               <span class="md-list-item-text">올린 질문</span>
             </md-list-item>
@@ -73,14 +73,6 @@ export default {
           this.$router.push(`${path}`);
         }
       }
-
-      // if (this.$route.path !== path) {
-      //   if (path === '/login') {
-      //     this.$EventBus.$emit('show-login', true);
-      //   } else {
-      //     this.$router.push(`${path}`);
-      //   }
-      // }
     },
   },
 };

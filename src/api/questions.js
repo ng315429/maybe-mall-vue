@@ -14,4 +14,23 @@ const apiFetchQuestions = page => {
     url: `questions?page=${page}`,
   });
 };
-export { apiAddQuestion, apiFetchQuestions };
+
+const apiFetchAuthQuestions = page => {
+  return instanceAuth({
+    method: 'get',
+    url: `questions/me?page=${page}`,
+  });
+};
+
+const apiFetchQuestionOne = id => {
+  return instanceAuth({
+    method: 'get',
+    url: `questions/${id}`,
+  });
+};
+export {
+  apiAddQuestion,
+  apiFetchQuestions,
+  apiFetchQuestionOne,
+  apiFetchAuthQuestions,
+};

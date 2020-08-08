@@ -5,6 +5,7 @@
 </template>
 
 <script>
+// import { apiFetchQuestionOne } from '@/api/questions';
 export default {
   data() {
     return {
@@ -13,6 +14,9 @@ export default {
   },
   components: {
     QuestionDetailForm: () => import('@/components/QuestionDetailForm'),
+  },
+  created() {
+    console.log(this.$route.params);
   },
 };
 </script>

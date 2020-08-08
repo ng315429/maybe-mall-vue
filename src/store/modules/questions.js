@@ -1,5 +1,5 @@
 // import { apiAddQuestion } from '../../api/question';
-import { apiFetchQuestions } from '../../api/questions';
+import { apiFetchQuestions, apiFetchAuthQuestions } from '../../api/questions';
 
 const questions = {
   state: {
@@ -11,15 +11,26 @@ const questions = {
     },
   },
   mutations: {
-    SET_QUESTIONS(state, questions) {
-      state.questions.push(...questions);
+    SET_QUESTIONS(state, { questions, init }) {
+      if (init) {
+        state.questions = questions;
+      } else {
+        state.questions.push(...questions);
+      }
     },
   },
   actions: {
-    FETCH_QUESTIONS({ commit }, page) {
+    FETCH_QUESTIONS({ commit }, { page, init }) {
       return apiFetchQuestions(page).then(res => {
         const { data } = res;
-        commit('SET_QUESTIONS', data.questions);
+        commit('SET_QUESTIONS', { questions: data.questions, init: init });
+        return res;
+      });
+    },
+    FETCH_QUESTIONS_AUTH({ commit }, { page, init }) {
+      return apiFetchAuthQuestions(page).then(res => {
+        const { data } = res;
+        commit('SET_QUESTIONS', { questions: data.questions, init: init });
         return res;
       });
     },

@@ -40,7 +40,7 @@ const routes = [
     ],
   },
   {
-    path: '/question',
+    path: '/questions',
     component: () => import('@/layout/MainLayout'),
     children: [
       {
@@ -48,6 +48,17 @@ const routes = [
         name: '질문등록',
         component: () => import('@/views/QuestionAddView.vue'),
       },
+      {
+        path: 'me',
+        name: '올린 질문',
+        component: () => import('@/views/QuestionAuthListView.vue'),
+      },
+    ],
+  },
+  {
+    path: '/questions',
+    component: () => import('@/layout/SubLayout'),
+    children: [
       {
         path: ':id',
         name: '질문상세',
