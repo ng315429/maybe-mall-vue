@@ -12,22 +12,15 @@
               <md-icon class="md-size-2x">check_circle_outline</md-icon>
             </div>
           </div>
-          <button class="vote-btn">
-            투표
-          </button>
         </div>
         <div class="divider"></div>
         <div class="img-box">
           <div class="img-section">
             <img :src="this.filterItem(question.items, 1, 'img')" />
-            <!--            <div class="vote-check" :class="{ active: isActive }">-->
             <div class="vote-check">
               <md-icon class="md-size-2x">done</md-icon>
             </div>
           </div>
-          <button class="vote-btn">
-            투표
-          </button>
         </div>
       </div>
 
@@ -71,6 +64,12 @@
           댓글...
         </div>
       </div>
+
+      <div class="item__edit">
+        <md-button class="md-fab md-mini md-plain" @click="editItem">
+          <md-icon>edit</md-icon>
+        </md-button>
+      </div>
     </md-card>
   </div>
 </template>
@@ -94,6 +93,9 @@ export default {
     QuestionItemInput: () => import('@/components/QuestionItemInput'),
   },
   methods: {
+    editItem() {
+      this.$router.push(`/questions/${this.question.id}`);
+    },
     filterItem(item, index, key) {
       if (item && item[index]) {
         return item[index][key];
@@ -198,6 +200,12 @@ export default {
       width: 100%;
       padding: 1rem 1rem;
     }
+  }
+  .item__edit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px 5px;
   }
 }
 </style>

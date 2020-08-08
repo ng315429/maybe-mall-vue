@@ -1,13 +1,11 @@
 <template>
   <div class="list-wrap">
-    <question-search></question-search>
-
     <div class="list-area">
-      <question-item
+      <question-auth-item
         v-for="item in questionList"
         :key="item.id"
         :question="item"
-      ></question-item>
+      ></question-auth-item>
     </div>
 
     <div class="add-btn" @click="$router.push('/question/add')">
@@ -62,7 +60,7 @@ export default {
     async getQuestions() {
       try {
         // const { data } = await apiFetchQuestions(this.pageNum);
-        const { data } = await this.$store.dispatch('FETCH_QUESTIONS', {
+        const { data } = await this.$store.dispatch('FETCH_QUESTIONS_AUTH', {
           page: this.pageNum,
           init: true,
         });
@@ -84,8 +82,7 @@ export default {
     },
   },
   components: {
-    QuestionItem: () => import('@/components/QuestionItem'),
-    QuestionSearch: () => import('@/components/QuestionSearch'),
+    QuestionAuthItem: () => import('@/components/QuestionAuthItem'),
   },
   created() {
     this.getQuestions();
