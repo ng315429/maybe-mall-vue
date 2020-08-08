@@ -3,24 +3,95 @@
     <question-search></question-search>
 
     <div class="list-area">
-      <question-item></question-item>
-      <question-item></question-item>
+      <question-item
+        v-for="item in questionList"
+        :key="item.id"
+        :question="item"
+      ></question-item>
     </div>
 
-    <div class="add-btn">
+    <div class="add-btn" @click="$router.push('/question/add')">
       <md-icon>edit</md-icon>
     </div>
   </div>
 </template>
 
 <script>
+import { apiFetchQuestions } from '@/api/questions';
 export default {
   data() {
-    return {};
+    return {
+      questionList: [],
+      pageNum: 1,
+      questionTotalCount: 0,
+      pageTotal: 1,
+      loading: false,
+    };
+  },
+  methods: {
+    async onScroll() {
+      // window.scrollY + document.documentElement.clientHeight >
+      // document.documentElement.scrollHeight - 300
+
+      console.log(window.scrollY);
+      console.log(document.documentElement.clientHeight);
+      console.log(document.documentElement.scrollHeight);
+
+      if (
+        window.scrollY + document.documentElement.clientHeight >
+          document.documentElement.scrollHeight - 300 &&
+        this.loading === false &&
+        this.pageNum < this.pageTotal
+      ) {
+        try {
+          this.pageNum++;
+          this.loading = true;
+          await this.getQuestions();
+          this.loading = false;
+        } catch (error) {
+          if (error.response) {
+            console.log(error.response);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
+          console.log(error.config);
+        }
+      }
+    },
+    async getQuestions() {
+      try {
+        const { data } = await apiFetchQuestions(this.pageNum);
+        this.pageNum = data.page_num;
+        this.pageTotal = data.page_total;
+        this.questionTotalCount = data.total_count;
+
+        this.questionList.push(...data.questions);
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+        console.log(error.config);
+      }
+    },
   },
   components: {
     QuestionItem: () => import('@/components/QuestionItem'),
     QuestionSearch: () => import('@/components/QuestionSearch'),
+  },
+  created() {
+    this.getQuestions();
+  },
+  beforeMount() {
+    window.addEventListener('scroll', this.onScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.onScroll);
   },
 };
 </script>

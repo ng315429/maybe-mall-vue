@@ -68,6 +68,11 @@ export default {
       this.$emit('imgRemove', index);
     },
     imgUploadRequest(input) {
+      if (this.limit < input.target.files.length) {
+        alert(`${this.limit}개 제한`);
+        return;
+      }
+
       if (this.limit === this.uploadImg.length) {
         alert(`${this.limit}개 제한`);
         return;
@@ -84,8 +89,9 @@ export default {
           apiFileUpload(formData).then(({ data }) => {
             this.showLoading = false;
             const resFileList = data.files;
+            let uploadImgValue = '';
             resFileList.forEach((file, index) => {
-              let uploadImgValue = `${process.env.VUE_APP_AWS_CLOUD_FRONT}/${file.key}`;
+              uploadImgValue = `${process.env.VUE_APP_AWS_CLOUD_FRONT}/${file.key}`;
               const reader = new FileReader();
               reader.readAsDataURL(fileList[index]);
               reader.onload = () => {

@@ -6,9 +6,8 @@
       <div class="img-area">
         <div class="img-box">
           <div class="img-section">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSSPZ5SSbU9o4WeXtFkr4DVLIFFka_UBbIQnA&usqp=CAU"
-            />
+            <img :src="filterImg(question.items, 0)" />
+
             <div class="vote-check">
               <md-icon class="md-size-2x">check_circle_outline</md-icon>
             </div>
@@ -20,9 +19,7 @@
         <div class="divider"></div>
         <div class="img-box">
           <div class="img-section">
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSSPZ5SSbU9o4WeXtFkr4DVLIFFka_UBbIQnA&usqp=CAU"
-            />
+            <img :src="this.filterImg(question.items, 1)" />
             <div class="vote-check" :class="{ active: isActive }">
               <md-icon class="md-size-2x">done</md-icon>
             </div>
@@ -36,32 +33,32 @@
       <div class="item-info-area">
         <question-item-input
           unit="이름"
-          leftValue="이름1"
-          rightValue="이름2"
+          :leftValue="question.items[0].name"
+          :rightValue="question.items[1].name"
         ></question-item-input>
 
         <question-item-input
           unit="브랜드"
-          leftValue="브랜드1"
-          rightValue="브랜드2"
+          :leftValue="question.items[0].brand"
+          :rightValue="question.items[1].brand"
         ></question-item-input>
 
         <question-item-input
           unit="가격"
-          leftValue="가격1"
-          rightValue="가격2"
+          :leftValue="question.items[0].price"
+          :rightValue="question.items[1].price"
         ></question-item-input>
 
         <question-item-input
           unit="링크"
-          leftValue="링크1"
-          rightValue="링크2"
+          :leftValue="question.items[0].link"
+          :rightValue="question.items[1].link"
         ></question-item-input>
       </div>
 
       <div class="item-description">
         <p>
-          asdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdaasdsadsadasdas
+          {{ question.description }}
         </p>
       </div>
 
@@ -79,6 +76,12 @@
 
 <script>
 export default {
+  props: {
+    question: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     return {
       isActive: true,
@@ -90,6 +93,15 @@ export default {
     QuestionItemInput: () => import('@/components/QuestionItemInput'),
   },
   methods: {
+    filterImg(item, index) {
+      console.log(item);
+      if (item && item[index] && item[index].img) {
+        return item[index].img;
+      } else {
+        console.log('error');
+        return require('@/assets/no_image.jpg');
+      }
+    },
     showComment() {
       this.showCommentCheck = !this.showCommentCheck;
     },
@@ -122,6 +134,7 @@ export default {
         height: 100%;
         img {
           width: 100%;
+          height: 150px;
         }
         .vote-check {
           top: 0;
