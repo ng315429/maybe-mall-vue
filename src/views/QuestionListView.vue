@@ -17,26 +17,25 @@
 </template>
 
 <script>
-import { apiFetchQuestions } from '@/api/questions';
+// import { apiFetchQuestions } from '@/api/questions';
+import { mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      questionList: [],
+      // questionList: [],
       pageNum: 1,
       questionTotalCount: 0,
       pageTotal: 1,
       loading: false,
     };
   },
+  computed: {
+    ...mapGetters({
+      questionList: 'getQuestions',
+    }),
+  },
   methods: {
     async onScroll() {
-      // window.scrollY + document.documentElement.clientHeight >
-      // document.documentElement.scrollHeight - 300
-
-      console.log(window.scrollY);
-      console.log(document.documentElement.clientHeight);
-      console.log(document.documentElement.scrollHeight);
-
       if (
         window.scrollY + document.documentElement.clientHeight >
           document.documentElement.scrollHeight - 300 &&
@@ -62,12 +61,16 @@ export default {
     },
     async getQuestions() {
       try {
-        const { data } = await apiFetchQuestions(this.pageNum);
+        // const { data } = await apiFetchQuestions(this.pageNum);
+        const { data } = await this.$store.dispatch(
+          'FETCH_QUESTIONS',
+          this.pageNum,
+        );
         this.pageNum = data.page_num;
         this.pageTotal = data.page_total;
         this.questionTotalCount = data.total_count;
 
-        this.questionList.push(...data.questions);
+        // this.questionList.push(...data.questions);
       } catch (error) {
         if (error.response) {
           console.log(error.response);

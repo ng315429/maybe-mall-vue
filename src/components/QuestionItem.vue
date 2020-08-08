@@ -6,7 +6,7 @@
       <div class="img-area">
         <div class="img-box">
           <div class="img-section">
-            <img :src="filterImg(question.items, 0)" />
+            <img :src="this.filterItem(question.items, 0, 'img')" />
 
             <div class="vote-check">
               <md-icon class="md-size-2x">check_circle_outline</md-icon>
@@ -19,8 +19,9 @@
         <div class="divider"></div>
         <div class="img-box">
           <div class="img-section">
-            <img :src="this.filterImg(question.items, 1)" />
-            <div class="vote-check" :class="{ active: isActive }">
+            <img :src="this.filterItem(question.items, 1, 'img')" />
+            <!--            <div class="vote-check" :class="{ active: isActive }">-->
+            <div class="vote-check">
               <md-icon class="md-size-2x">done</md-icon>
             </div>
           </div>
@@ -33,26 +34,26 @@
       <div class="item-info-area">
         <question-item-input
           unit="이름"
-          :leftValue="question.items[0].name"
-          :rightValue="question.items[1].name"
+          :leftValue="this.filterItem(question.items, 0, 'name')"
+          :rightValue="this.filterItem(question.items, 1, 'name')"
         ></question-item-input>
 
         <question-item-input
           unit="브랜드"
-          :leftValue="question.items[0].brand"
-          :rightValue="question.items[1].brand"
+          :leftValue="this.filterItem(question.items, 0, 'brand')"
+          :rightValue="this.filterItem(question.items, 1, 'brand')"
         ></question-item-input>
 
         <question-item-input
           unit="가격"
-          :leftValue="question.items[0].price"
-          :rightValue="question.items[1].price"
+          :leftValue="this.filterItem(question.items, 0, 'price')"
+          :rightValue="this.filterItem(question.items, 1, 'price')"
         ></question-item-input>
 
         <question-item-input
           unit="링크"
-          :leftValue="question.items[0].link"
-          :rightValue="question.items[1].link"
+          :leftValue="this.filterItem(question.items, 0, 'link')"
+          :rightValue="this.filterItem(question.items, 1, 'link')"
         ></question-item-input>
       </div>
 
@@ -93,13 +94,11 @@ export default {
     QuestionItemInput: () => import('@/components/QuestionItemInput'),
   },
   methods: {
-    filterImg(item, index) {
-      console.log(item);
-      if (item && item[index] && item[index].img) {
-        return item[index].img;
+    filterItem(item, index, key) {
+      if (item && item[index]) {
+        return item[index][key];
       } else {
-        console.log('error');
-        return require('@/assets/no_image.jpg');
+        return key === 'img' ? require('@/assets/no_image.jpg') : '';
       }
     },
     showComment() {
@@ -122,7 +121,7 @@ export default {
 
     .divider {
       width: 1px;
-      background-color: gray;
+      background-color: #efefef;
     }
     .img-box {
       position: relative;
