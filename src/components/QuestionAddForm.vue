@@ -148,7 +148,7 @@ export default {
       try {
         const { data } = await apiAddQuestion(questionData);
         if (data.code === 200) {
-          // this.$router.push('/');
+          this.$router.push('/');
         }
       } catch (error) {
         if (error.response) {

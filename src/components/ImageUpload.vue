@@ -137,6 +137,14 @@ export default {
 
       .img-box {
         position: relative;
+        width: 100%;
+        height: 100%;
+
+        img {
+          border-radius: 1rem;
+          width: 100%;
+          height: 100%;
+        }
         > .img__remove {
           position: absolute;
           top: 2px;

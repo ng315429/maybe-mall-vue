@@ -80,9 +80,8 @@ export default {
 
 <style lang="scss">
 .main-content {
-  width: 100%;
+  width: 95%;
   height: 100%;
-  background-color: $main-background-color;
-  padding: 1rem 1rem;
+  margin: 0 auto;
 }
 </style>

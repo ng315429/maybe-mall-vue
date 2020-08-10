@@ -34,6 +34,10 @@ export default {
       questionList: 'getQuestions',
     }),
   },
+  components: {
+    QuestionItem: () => import('@/components/QuestionItem'),
+    QuestionSearch: () => import('@/components/QuestionSearch'),
+  },
   methods: {
     async onScroll() {
       if (
@@ -83,10 +87,6 @@ export default {
       }
     },
   },
-  components: {
-    QuestionItem: () => import('@/components/QuestionItem'),
-    QuestionSearch: () => import('@/components/QuestionSearch'),
-  },
   created() {
     this.getQuestions();
   },
@@ -101,7 +101,6 @@ export default {
 
 <style scoped lang="scss">
 .list-wrap {
-  background-color: $main-background-color;
   .add-btn {
     border-radius: 50%;
     display: flex;

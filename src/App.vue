@@ -33,7 +33,7 @@ export default {
 <style lang="scss">
 .main-wrap {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   margin: 0 auto;
   background-color: #f7f7f5;
   .main-area {
@@ -41,6 +41,7 @@ export default {
     max-width: 414px;
     margin: 0 auto;
     border: 1px solid $main-color;
+    background-color: $main-background-color;
   }
 }
 </style>

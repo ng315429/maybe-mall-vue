@@ -58,9 +58,7 @@
       </div>
 
       <div class="item-description">
-        <p>
-          {{ question.description }}
-        </p>
+        <pre>{{ question.description }}</pre>
       </div>
 
       <div class="item-comment">
