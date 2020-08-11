@@ -1,7 +1,11 @@
 <template>
   <div class="item-wrap">
     <md-card class="md-primary" md-theme="black-card">
-      <question-item-header></question-item-header>
+      <question-item-header
+        :gender="question.gender"
+        :age="question.age"
+        :category="question.category"
+      ></question-item-header>
 
       <div class="img-area">
         <div class="img-box">
@@ -12,7 +16,7 @@
               <md-icon class="md-size-2x">check_circle_outline</md-icon>
             </div>
           </div>
-          <button class="vote-btn">
+          <button class="vote-btn" @click="voteItem(question.items[0].id)">
             투표
           </button>
         </div>
@@ -25,7 +29,7 @@
               <md-icon class="md-size-2x">done</md-icon>
             </div>
           </div>
-          <button class="vote-btn">
+          <button class="vote-btn" @click="voteItem(question.items[1].id)">
             투표
           </button>
         </div>
@@ -61,14 +65,14 @@
         <pre>{{ question.description }}</pre>
       </div>
 
-      <div class="item-comment">
-        <div class="comment-btn-box">
-          <button class="comment-btn" @click="showComment">댓글 달기</button>
-        </div>
-        <div class="comment-content" v-if="showCommentCheck">
-          댓글...
-        </div>
-      </div>
+      <!--      <div class="item-comment">-->
+      <!--        <div class="comment-btn-box">-->
+      <!--          <button class="comment-btn" @click="showComment">댓글 달기</button>-->
+      <!--        </div>-->
+      <!--        <div class="comment-content" v-if="showCommentCheck">-->
+      <!--          댓글...-->
+      <!--        </div>-->
+      <!--      </div>-->
     </md-card>
   </div>
 </template>
@@ -101,6 +105,9 @@ export default {
     },
     showComment() {
       this.showCommentCheck = !this.showCommentCheck;
+    },
+    voteItem(id) {
+      console.log(id);
     },
   },
 };

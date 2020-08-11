@@ -27,8 +27,8 @@
       </md-field>
 
       <md-field>
-        <label for="movie">나이대</label>
-        <md-select v-model="age" name="movie" id="movie">
+        <label for="age">나이대</label>
+        <md-select v-model="age" name="age" id="age">
           <md-option value="1">1~9</md-option>
           <md-option value="10">10~19</md-option>
           <md-option value="20">20~29</md-option>
@@ -40,6 +40,14 @@
           <md-option value="80">80~89</md-option>
           <md-option value="90">90~99</md-option>
           <md-option value="100">100~</md-option>
+        </md-select>
+      </md-field>
+
+      <md-field>
+        <label for="gender">성별</label>
+        <md-select v-model="gender" name="gender" id="gender">
+          <md-option value="male">남</md-option>
+          <md-option value="female">여</md-option>
         </md-select>
       </md-field>
 
@@ -61,6 +69,7 @@ export default {
       name: '',
       email: '',
       age: '',
+      gender: '',
     };
   },
   methods: {
@@ -71,6 +80,7 @@ export default {
         name: this.name,
         email: this.email,
         age: this.age,
+        gender: this.gender,
       };
       try {
         const { data } = await apiRegisterUser(userData);

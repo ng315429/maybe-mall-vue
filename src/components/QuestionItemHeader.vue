@@ -1,17 +1,37 @@
 <template>
   <div class="item-header-wrap">
     <div>
-      <span>카테고리</span>
+      <span>{{ this.category }}</span>
     </div>
     <div>
-      <span>성별</span>
-      <span>나이대</span>
+      <span>{{ this.reGender }}</span>
+      <span>{{ this.age }}세</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    category: {
+      type: String,
+      required: true,
+    },
+    age: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
+  },
+  computed: {
+    reGender() {
+      return this.gender === 'male' ? '남' : '여';
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
