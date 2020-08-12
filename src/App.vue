@@ -38,6 +38,7 @@ export default {
   background-color: #f7f7f5;
   .main-area {
     width: 100%;
+    height: 100vh;
     max-width: 414px;
     margin: 0 auto;
     border: 1px solid $main-color;
