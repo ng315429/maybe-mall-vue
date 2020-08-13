@@ -1,14 +1,19 @@
 <template>
   <div class="list-wrap">
-    <question-search></question-search>
+    <question-category @selectCategory="onSelectCategory"></question-category>
 
     <div class="list-area">
-      <question-item
-        v-for="item in questionList"
-        :key="item.id"
-        :question="item"
-        :auth="false"
-      ></question-item>
+      <template v-if="questionList.length > 0">
+        <question-item
+          v-for="item in questionList"
+          :key="item.id"
+          :question="item"
+          :auth="false"
+        ></question-item>
+      </template>
+      <template v-else>
+        <div class="no-result">내용이 없습니다</div>
+      </template>
     </div>
 
     <div class="add-btn" @click="$router.push('/questions/add')">
@@ -28,6 +33,7 @@ export default {
       questionTotalCount: 0,
       pageTotal: 1,
       loading: false,
+      filterCategory: '',
     };
   },
   computed: {
@@ -37,9 +43,13 @@ export default {
   },
   components: {
     QuestionItem: () => import('@/components/QuestionItem'),
-    QuestionSearch: () => import('@/components/QuestionSearch'),
+    QuestionCategory: () => import('@/components/QuestionCategory'),
   },
   methods: {
+    onSelectCategory(selectedCategory) {
+      this.filterCategory = selectedCategory;
+      this.getQuestions();
+    },
     async onScroll() {
       if (
         window.scrollY + document.documentElement.clientHeight >
@@ -70,6 +80,7 @@ export default {
         const { data } = await this.$store.dispatch('FETCH_QUESTIONS', {
           page: this.pageNum,
           init: true,
+          category: this.filterCategory,
         });
         this.pageNum = data.page_num;
         this.pageTotal = data.page_total;
@@ -111,6 +122,12 @@ export default {
     position: fixed;
     bottom: 2rem;
     left: 2rem;
+  }
+
+  .no-result {
+    padding: 2rem 2rem;
+    font-size: 1.5rem;
+    text-align: center;
   }
 }
 </style>

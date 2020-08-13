@@ -30,8 +30,8 @@ const questions = {
     },
   },
   actions: {
-    FETCH_QUESTIONS({ commit }, { page, init }) {
-      return apiFetchQuestions(page).then(res => {
+    FETCH_QUESTIONS({ commit }, { page, init, category }) {
+      return apiFetchQuestions({ page, category }).then(res => {
         const { data } = res;
         commit('SET_QUESTIONS', { questions: data.questions, init: init });
         return res;

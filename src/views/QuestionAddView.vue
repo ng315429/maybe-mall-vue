@@ -7,9 +7,7 @@
 <script>
 export default {
   data() {
-    return {
-      category: '',
-    };
+    return {};
   },
   components: {
     QuestionAddForm: () => import('@/components/QuestionAddForm'),

@@ -8,10 +8,10 @@ const apiAddQuestion = payload => {
   });
 };
 
-const apiFetchQuestions = page => {
+const apiFetchQuestions = ({ page, category }) => {
   return instance({
     method: 'get',
-    url: `questions?page=${page}`,
+    url: `questions?page=${page}&category=${category}`,
   });
 };
 
@@ -22,7 +22,7 @@ const apiFetchAuthQuestions = page => {
   });
 };
 
-const apiFetchQuestionOne = id => {
+const apiFetchAuthQuestionOne = id => {
   return instanceAuth({
     method: 'get',
     url: `questions/${id}`,
@@ -31,6 +31,6 @@ const apiFetchQuestionOne = id => {
 export {
   apiAddQuestion,
   apiFetchQuestions,
-  apiFetchQuestionOne,
+  apiFetchAuthQuestionOne,
   apiFetchAuthQuestions,
 };

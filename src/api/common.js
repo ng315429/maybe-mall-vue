@@ -1,7 +1,6 @@
-import { instanceAuth } from '@/api/index';
+import { instanceAuth, instance } from '@/api/index';
 
 const apiFileUpload = payload => {
-  console.log(payload);
   return instanceAuth({
     method: 'post',
     url: 'file/upload',
@@ -10,4 +9,11 @@ const apiFileUpload = payload => {
   });
 };
 
-export { apiFileUpload };
+const apiFetchCategories = () => {
+  return instance({
+    method: 'get',
+    url: 'categories',
+  });
+};
+
+export { apiFileUpload, apiFetchCategories };

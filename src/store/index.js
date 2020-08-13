@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import auth from './modules/auth';
 import questions from './modules/questions';
+import categories from './modules/categories';
 import { deleteCookie } from '../utils/cookies';
 Vue.use(Vuex);
 
@@ -10,6 +11,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     questions,
+    categories,
   },
   state: {},
   mutations: {

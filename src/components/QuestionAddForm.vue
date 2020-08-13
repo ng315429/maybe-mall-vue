@@ -7,12 +7,13 @@
         <md-input v-model="title"></md-input>
       </md-field>
 
-      <md-field>
-        <label>카테고리</label>
-        <md-select v-model="category" id="category" name="category">
-          <md-option value="1">의류</md-option>
-        </md-select>
-      </md-field>
+      <!--      <md-field>-->
+      <!--        <label>카테고리</label>-->
+      <!--        <md-select v-model="category" id="category" name="category">-->
+      <!--          <md-option value="1">의류</md-option>-->
+      <!--        </md-select>-->
+      <!--      </md-field>-->
+      <question-category @selectCategory="onSelectCategory"></question-category>
 
       <div class="add-section">
         <div class="add-area">
@@ -110,7 +111,8 @@ export default {
     };
   },
   components: {
-    imageUpload: () => import('@/components/ImageUpload'),
+    ImageUpload: () => import('@/components/ImageUpload'),
+    QuestionCategory: () => import('@/components/QuestionCategory'),
   },
   methods: {
     imageRemove01(index) {
@@ -125,6 +127,10 @@ export default {
     imageUpload02(img) {
       this.uploadImg02.push(img);
     },
+    onSelectCategory(selectedCategory) {
+      this.category = selectedCategory;
+    },
+
     async onSubmit() {
       const questionData = {
         title: this.title,

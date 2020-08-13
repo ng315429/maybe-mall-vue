@@ -5,7 +5,7 @@
 </template>
 
 <script>
-// import { apiFetchQuestionOne } from '@/api/questions';
+import { apiFetchAuthQuestionOne } from '@/api/questions';
 export default {
   data() {
     return {
@@ -15,8 +15,15 @@ export default {
   components: {
     QuestionDetailForm: () => import('@/components/QuestionDetailForm'),
   },
+  methods: {
+    async getQuestionOne() {
+      const questionId = this.$route.params.id;
+      const { data } = await apiFetchAuthQuestionOne(questionId);
+      console.log(data);
+    },
+  },
   created() {
-    console.log(this.$route.params);
+    this.getQuestionOne();
   },
 };
 </script>

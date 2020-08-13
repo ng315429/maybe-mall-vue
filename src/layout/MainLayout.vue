@@ -13,6 +13,10 @@
         </md-toolbar>
 
         <md-list>
+          <md-list-item @click="goPathPush('/')">
+            <md-icon>move_to_inbox</md-icon>
+            <span class="md-list-item-text">질문들</span>
+          </md-list-item>
           <template v-if="!isLogin">
             <md-list-item @click="goPathPush('/login')">
               <md-icon>move_to_inbox</md-icon>
