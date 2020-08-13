@@ -99,7 +99,7 @@ export default {
 
 <style scoped lang="scss">
 .list-wrap {
-  background-color: $main-background-color;
+  background-color: #fff;
   .add-btn {
     border-radius: 50%;
     display: flex;

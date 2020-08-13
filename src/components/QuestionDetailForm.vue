@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import { apiAddQuestion } from '@/api/questions';
+import { apiAddQuestion, apiFetchAuthQuestionOne } from '@/api/questions';
 
 export default {
   data() {
@@ -108,6 +108,9 @@ export default {
         price: '',
         link: '',
       },
+
+      question: {},
+      questionItems: [],
     };
   },
   components: {
@@ -167,6 +170,26 @@ export default {
         console.log(error.config);
       }
     },
+    async getQuestionOne() {
+      try {
+        const questionId = this.$route.params.id;
+        const { data } = await apiFetchAuthQuestionOne(questionId);
+        this.question = data.question[0];
+        this.questionItems = data.items;
+      } catch (error) {
+        if (error.response) {
+          console.log(error.response);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+        console.log(error.config);
+      }
+    },
+  },
+  created() {
+    this.getQuestionOne();
   },
 };
 </script>
