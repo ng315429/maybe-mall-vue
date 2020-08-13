@@ -1,7 +1,11 @@
 <template>
   <div class="item-wrap">
     <md-card class="md-primary" md-theme="black-card">
-      <question-item-header></question-item-header>
+      <question-item-header
+        :gender="question.gender"
+        :age="question.age"
+        :category="question.category"
+      ></question-item-header>
 
       <div class="img-area">
         <div class="img-box">

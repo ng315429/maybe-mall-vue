@@ -7,10 +7,11 @@
         v-for="item in questionList"
         :key="item.id"
         :question="item"
+        :auth="false"
       ></question-item>
     </div>
 
-    <div class="add-btn" @click="$router.push('/question/add')">
+    <div class="add-btn" @click="$router.push('/questions/add')">
       <md-icon>edit</md-icon>
     </div>
   </div>

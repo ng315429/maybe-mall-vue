@@ -1,11 +1,12 @@
 <template>
   <div class="list-wrap">
     <div class="list-area">
-      <question-auth-item
+      <question-item
         v-for="item in questionList"
         :key="item.id"
         :question="item"
-      ></question-auth-item>
+        :auth="true"
+      ></question-item>
     </div>
 
     <div class="add-btn" @click="$router.push('/question/add')">
@@ -27,9 +28,12 @@ export default {
       loading: false,
     };
   },
+  components: {
+    QuestionItem: () => import('@/components/QuestionItem'),
+  },
   computed: {
     ...mapGetters({
-      questionList: 'getQuestions',
+      questionList: 'getAuthQuestions',
     }),
   },
   methods: {
@@ -80,9 +84,6 @@ export default {
         console.log(error.config);
       }
     },
-  },
-  components: {
-    QuestionAuthItem: () => import('@/components/QuestionAuthItem'),
   },
   created() {
     this.getQuestions();

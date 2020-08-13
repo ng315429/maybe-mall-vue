@@ -16,7 +16,11 @@
               <md-icon class="md-size-2x">check_circle_outline</md-icon>
             </div>
           </div>
-          <button class="vote-btn" @click="voteItem(question.items[0].id)">
+          <button
+            v-if="!auth"
+            class="vote-btn"
+            @click="voteItem(question.items[0].id)"
+          >
             투표
           </button>
         </div>
@@ -29,7 +33,11 @@
               <md-icon class="md-size-2x">done</md-icon>
             </div>
           </div>
-          <button class="vote-btn" @click="voteItem(question.items[1].id)">
+          <button
+            v-if="!auth"
+            class="vote-btn"
+            @click="voteItem(question.items[1].id)"
+          >
             투표
           </button>
         </div>
@@ -73,6 +81,12 @@
       <!--          댓글...-->
       <!--        </div>-->
       <!--      </div>-->
+
+      <div v-if="auth" class="item__edit">
+        <md-button class="md-fab md-mini md-plain" @click="editItem">
+          <md-icon>edit</md-icon>
+        </md-button>
+      </div>
     </md-card>
   </div>
 </template>
@@ -82,6 +96,10 @@ export default {
   props: {
     question: {
       type: Object,
+      required: true,
+    },
+    auth: {
+      type: Boolean,
       required: true,
     },
   },
@@ -108,6 +126,9 @@ export default {
     },
     voteItem(id) {
       console.log(id);
+    },
+    editItem() {
+      this.$router.push(`/questions/${this.question.id}`);
     },
   },
 };
@@ -203,6 +224,12 @@ export default {
       width: 100%;
       padding: 1rem 1rem;
     }
+  }
+  .item__edit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px 5px;
   }
 }
 </style>
