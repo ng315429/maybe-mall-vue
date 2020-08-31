@@ -1,12 +1,17 @@
 <template>
   <div class="list-wrap">
     <div class="list-area">
-      <question-item
-        v-for="item in questionList"
-        :key="item.id"
-        :question="item"
-        :auth="true"
-      ></question-item>
+      <template v-if="questionList.length > 0">
+        <question-item
+          v-for="item in questionList"
+          :key="item.id"
+          :question="item"
+          :auth="true"
+        ></question-item>
+      </template>
+      <template v-else>
+        <div class="no-result">내용이 없습니다</div>
+      </template>
     </div>
 
     <div class="add-btn" @click="$router.push('/question/add')">
@@ -109,6 +114,12 @@ export default {
     position: fixed;
     bottom: 2rem;
     left: 2rem;
+  }
+
+  .no-result {
+    padding: 3rem 3rem;
+    font-size: 1.5rem;
+    text-align: center;
   }
 }
 </style>

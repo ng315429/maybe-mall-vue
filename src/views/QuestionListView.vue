@@ -126,7 +126,7 @@ export default {
   }
 
   .no-result {
-    padding: 2rem 2rem;
+    padding: 3rem 3rem;
     font-size: 1.5rem;
     text-align: center;
   }

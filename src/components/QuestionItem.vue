@@ -11,34 +11,34 @@
         <div class="img-box">
           <div class="img-section">
             <img :src="this.filterItem(question.items, 0, 'img')" />
-
-            <div class="vote-check">
+            <div v-if="isActive0" class="vote-check">
               <md-icon class="md-size-2x">check_circle_outline</md-icon>
             </div>
           </div>
           <button
             v-if="!auth"
             class="vote-btn"
-            @click="voteItem(question.items[0].id)"
+            @click="voteItem(question.items[0].id, 0)"
           >
-            투표
+            투표 ({{ itemVoteCount0 }})
           </button>
         </div>
         <div class="divider"></div>
         <div class="img-box">
           <div class="img-section">
             <img :src="this.filterItem(question.items, 1, 'img')" />
-            <!--            <div class="vote-check" :class="{ active: isActive }">-->
-            <div class="vote-check">
-              <md-icon class="md-size-2x">done</md-icon>
+
+            <div v-if="isActive1" class="vote-check">
+              <!--              <md-icon class="md-size-2x">done</md-icon>-->
+              <md-icon class="md-size-2x">check_circle_outline</md-icon>
             </div>
           </div>
           <button
             v-if="!auth"
             class="vote-btn"
-            @click="voteItem(question.items[1].id)"
+            @click="voteItem(question.items[1].id, 1)"
           >
-            투표
+            투표 ({{ itemVoteCount1 }})
           </button>
         </div>
       </div>
@@ -73,15 +73,6 @@
         <pre>{{ question.description }}</pre>
       </div>
 
-      <!--      <div class="item-comment">-->
-      <!--        <div class="comment-btn-box">-->
-      <!--          <button class="comment-btn" @click="showComment">댓글 달기</button>-->
-      <!--        </div>-->
-      <!--        <div class="comment-content" v-if="showCommentCheck">-->
-      <!--          댓글...-->
-      <!--        </div>-->
-      <!--      </div>-->
-
       <div v-if="auth" class="item__edit">
         <md-button class="md-fab md-mini md-plain" @click="editItem">
           <md-icon>edit</md-icon>
@@ -92,6 +83,7 @@
 </template>
 
 <script>
+import { apiVoteQuestion } from '@/api/questions';
 export default {
   props: {
     question: {
@@ -105,7 +97,10 @@ export default {
   },
   data() {
     return {
-      isActive: true,
+      isActive0: false,
+      isActive1: false,
+      itemVoteCount0: this.question.items[0].vote_count,
+      itemVoteCount1: this.question.items[1].vote_count,
       showCommentCheck: false,
     };
   },
@@ -121,11 +116,26 @@ export default {
         return key === 'img' ? require('@/assets/no_image.jpg') : '';
       }
     },
-    showComment() {
-      this.showCommentCheck = !this.showCommentCheck;
-    },
-    voteItem(id) {
-      console.log(id);
+    // showComment() {
+    //   this.showCommentCheck = !this.showCommentCheck;
+    // },
+    async voteItem(id, index) {
+      const { data } = await apiVoteQuestion(id, 'plus', this.question.id);
+      if (index === 0) {
+        this.isActive0 = data.vote_status === 'plus' ? true : false;
+        if (this.isActive0) {
+          this.itemVoteCount0 = this.itemVoteCount0 + 1;
+        } else {
+          this.itemVoteCount0 = this.itemVoteCount0 - 1;
+        }
+      } else {
+        this.isActive1 = data.vote_status === 'plus' ? true : false;
+        if (this.isActive1) {
+          this.itemVoteCount1 = this.itemVoteCount1 + 1;
+        } else {
+          this.itemVoteCount1 = this.itemVoteCount1 - 1;
+        }
+      }
     },
     editItem() {
       this.$router.push(`/questions/${this.question.id}`);
@@ -153,6 +163,7 @@ export default {
       position: relative;
       width: 50%;
       height: 100%;
+      border-top: 1px solid #efefef;
       .img-section {
         position: relative;
         width: 100%;
@@ -172,7 +183,7 @@ export default {
           background: #000;
           opacity: 0.5;
           color: #fff;
-          display: none;
+          display: flex;
 
           &.active {
             display: flex;

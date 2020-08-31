@@ -8,6 +8,7 @@
         placeholder="카테고리"
         @md-selected="categorySelect"
       >
+        <md-option value="" selected>전체</md-option>
         <md-option
           :value="category.id"
           v-for="category in categories"

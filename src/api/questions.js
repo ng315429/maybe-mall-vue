@@ -28,9 +28,22 @@ const apiFetchAuthQuestionOne = id => {
     url: `questions/${id}`,
   });
 };
+
+const apiVoteQuestion = (itemId, vote, questionId) => {
+  return instanceAuth({
+    method: 'post',
+    url: `questions/vote`,
+    data: {
+      vote,
+      question_id: questionId,
+      item_id: itemId,
+    },
+  });
+};
 export {
   apiAddQuestion,
   apiFetchQuestions,
   apiFetchAuthQuestionOne,
   apiFetchAuthQuestions,
+  apiVoteQuestion,
 };
